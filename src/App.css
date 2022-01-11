@@ -7,18 +7,19 @@
   margin-right: 50px;
 }
 
-.error {
-  border: red 1px solid;
+.is-done {
+  opacity:0.3;
 }
 
-.error-message {
-  color: red;
-}
 
 .active-filter {
-  background-color: aquamarine;
+  background-color: cadetblue;
 }
 
-.is-done {
-  opacity: 0.5;
+.error {
+  border: 2px solid red;
+  outline: none;
+  background-color: rgba(161, 26, 26, 0.3);
 }
+
+
