@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
-import TodoList from "./Todolist";
+import TodoList from "./Components/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "./AddItemForm";
+import {AddItemForm} from "./Components/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 
@@ -113,19 +113,21 @@ function App() {
                            height: '400px',
                            width: '300px'
                        }}>
-                    <TodoList
-                        todoListID={tl.id}
-                        filter={tl.filter}
-                        title={tl.title}
-                        tasks={getTasksForRender(tl.filter, tasks[tl.id])}
-                        addTask={addTask}
-                        removeTask={removeTask}
-                        changeTodoListFilter={changeTodoListFilter}
-                        changeTaskStatus={changeTaskStatus}
-                        removeTodoList={removeTodoList}
-                        changeTasksTitle={changeTasksTitle}
-                        changeTodoListTitle={changeTodoListTitle}
-                    />
+                    <div>
+                        <TodoList
+                            todoListID={tl.id}
+                            filter={tl.filter}
+                            title={tl.title}
+                            tasks={getTasksForRender(tl.filter, tasks[tl.id])}
+                            addTask={addTask}
+                            removeTask={removeTask}
+                            changeTodoListFilter={changeTodoListFilter}
+                            changeTaskStatus={changeTaskStatus}
+                            removeTodoList={removeTodoList}
+                            changeTasksTitle={changeTasksTitle}
+                            changeTodoListTitle={changeTodoListTitle}
+                        />
+                    </div>
                 </Paper>
             </Grid>)
     })
