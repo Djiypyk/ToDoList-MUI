@@ -1,7 +1,9 @@
-import React, {useState, KeyboardEvent, ChangeEvent, MouseEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 import {FilterValuesType, TaskType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import {Button, ButtonGroup, Checkbox, IconButton, List, ListItem, Typography} from "@material-ui/core";
+import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 
 type TodoListPropsType = {
     title: string
@@ -27,15 +29,15 @@ const TodoList = (props: TodoListPropsType) => {
             props.changeTasksTitle(t.id, newTitle, props.todoListID)
         }
         return (
-            <li key={t.id}>
-                <input
-                    type="checkbox"
+            <ListItem key={t.id} divider style={{display: 'flex', justifyContent: 'space-between'}}>
+                <Checkbox
                     checked={t.isDone}
                     onChange={changeStatus}
                 />
                 <EditableSpan title={t.title} changeTitle={changeTaskTitle}/>
-                <button onClick={removeTask}>x</button>
-            </li>
+                <IconButton onClick={removeTask}>
+                    <DeleteForeverOutlinedIcon color={'primary'}/></IconButton>
+            </ListItem>
         )
     })
 
@@ -50,37 +52,44 @@ const TodoList = (props: TodoListPropsType) => {
     const changeTodoListTitle = (title: string) => {
         props.changeTodoListTitle(title, props.todoListID)
     }
-    const getBtnClass = (filter: FilterValuesType) => {
-        return props.filter === filter ? "active-filter" : ""
-    }
 
     return (
-        <div>
-            <h3>
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            height: '100%'
+        }}>
+            <Typography variant={'h5'} align={'center'} style={{fontWeight: 'bold'}}>
                 <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
-                {/*{props.title}*/}
-                <button onClick={removeTodoList}>x</button>
-            </h3>
+
+                <IconButton onClick={removeTodoList} color={'primary'}
+                            size={'small'}><DeleteForeverOutlinedIcon/></IconButton>
+            </Typography>
             <AddItemForm addItem={addTask}/>
-            <ul>
+            <List style={{textAlign: 'center'}}>
                 {tasksList}
-            </ul>
+            </List>
             <div>
-                <button
-                    className={getBtnClass("all")}
-                    onClick={onClickSetAllFilter}
-                >All
-                </button>
-                <button
-                    className={getBtnClass("active")}
-                    onClick={onClickSetActiveFilter}
-                >Active
-                </button>
-                <button
-                    className={getBtnClass("completed")}
-                    onClick={onClickSetCompletedFilter}
-                >Completed
-                </button>
+                <ButtonGroup size={'small'} variant={'contained'} disableElevation
+                             fullWidth
+                >
+                    <Button
+                        color={props.filter === 'all' ? 'secondary' : 'primary'}
+                        onClick={onClickSetAllFilter}
+                    >All
+                    </Button>
+                    <Button
+                        color={props.filter === 'active' ? 'secondary' : 'primary'}
+                        onClick={onClickSetActiveFilter}
+                    >Active
+                    </Button>
+                    <Button
+                        color={props.filter === 'completed' ? 'secondary' : 'primary'}
+                        onClick={onClickSetCompletedFilter}
+                    >Completed
+                    </Button>
+                </ButtonGroup>
             </div>
         </div>
     )
