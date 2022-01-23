@@ -53,29 +53,20 @@ function App() {
 
     //BLL:
 
-    const changeTodoListFilter = (filter: FilterValuesType, todoListID: string) => {
-        setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, filter: filter} : tl));
-    }
 
     const removeTask = (taskID: string, todoListID: string) => {
-        const copyTasks = {...tasks}
-        copyTasks[todoListID] = tasks[todoListID].filter(t => t.id !== taskID)
-        setTasks(copyTasks)
+        setTasks({...tasks, [todoListID]: tasks[todoListID].filter(t=> t.id !== taskID)})
     }
-
     const addTask = (title: string, todoListID: string) => {
-        const copyTasks = {...tasks}
-        copyTasks[todoListID] = [{id: v1(), title, isDone: true}, ...tasks[todoListID]]
-        setTasks(copyTasks)
+        setTasks({...tasks, [todoListID]:[{id: v1(), title, isDone: true},...tasks[todoListID]]})
     }
     const changeTaskStatus = (taskID: string, isDone: boolean, todoListID: string) => {
-        const copyTasks = {...tasks}
-        copyTasks[todoListID] = tasks[todoListID].map(t => t.id === taskID ? {...t, isDone} : t)
-        setTasks(copyTasks)
+        setTasks({...tasks, [todoListID]: tasks[todoListID].map(t=>t.id === taskID ? {...t, isDone} : t)})
     }
     const changeTasksTitle = (taskID: string, title: string, todoListID: string) => {
         setTasks({...tasks, [todoListID]: tasks[todoListID].map(t => t.id === taskID ? {...t, title} : t)})
     }
+
 
     const removeTodoList = (todoListID: string) => {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
@@ -90,8 +81,9 @@ function App() {
         const newTodoListID = v1()
         setTodoLists([...todoLists, {id: newTodoListID, title, filter: 'all'}])
         setTasks({...tasks, [newTodoListID]: []})
-
-
+    }
+    const changeTodoListFilter = (filter: FilterValuesType, todoListID: string) => {
+        setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, filter: filter} : tl));
     }
 
     const getTasksForRender = (filter: FilterValuesType, tasks: Array<TaskType>): Array<TaskType> => {
@@ -104,6 +96,7 @@ function App() {
                 return tasks
         }
     }
+
     const todoListComps = todoLists.map(tl => {
         return (
             <Grid item key={tl.id}>
