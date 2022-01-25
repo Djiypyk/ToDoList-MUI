@@ -20,7 +20,7 @@ export type TodoListType = {
     filter: FilterValuesType
 }
 
-type TaskStateType = {
+type TaskStateType =  {
     [id: string]: Array<TaskType>
 }
 
@@ -53,7 +53,7 @@ function App() {
 
     //BLL:
 
-
+//tasks:
     const removeTask = (taskID: string, todoListID: string) => {
         setTasks({...tasks, [todoListID]: tasks[todoListID].filter(t=> t.id !== taskID)})
     }
@@ -67,7 +67,7 @@ function App() {
         setTasks({...tasks, [todoListID]: tasks[todoListID].map(t => t.id === taskID ? {...t, title} : t)})
     }
 
-
+//todolists:
     const removeTodoList = (todoListID: string) => {
         setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
         const copyTasks = {...tasks}
@@ -85,6 +85,7 @@ function App() {
     const changeTodoListFilter = (filter: FilterValuesType, todoListID: string) => {
         setTodoLists(todoLists.map(tl => tl.id === todoListID ? {...tl, filter: filter} : tl));
     }
+
 
     const getTasksForRender = (filter: FilterValuesType, tasks: Array<TaskType>): Array<TaskType> => {
         switch (filter) {
