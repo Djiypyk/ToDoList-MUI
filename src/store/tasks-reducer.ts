@@ -7,14 +7,6 @@ export const REMOVE_TASK = 'REMOVE-TASK'
 export const ADD_TASK = 'ADD-TASK'
 export const CHANGE_TASK_STATUS = 'CHANGE-TASK-STATUS'
 
-
-export type ActionType = addTaskAT
-    | RemoveTaskAT
-    | ChangeTaskStatusAT
-    | ChangeTaskTitleAT
-    | AddTodoListAT
-    | RemoveTodoListAT
-
 type addTaskAT = {
     type: typeof ADD_TASK
     title: string
@@ -39,9 +31,16 @@ type ChangeTaskTitleAT = {
     title: string
     todoListID: string
 }
+export type ActionType = addTaskAT
+    | RemoveTaskAT
+    | ChangeTaskStatusAT
+    | ChangeTaskTitleAT
+    | AddTodoListAT
+    | RemoveTodoListAT
 
+const initialState: TasksStateType = {}
 
-export const tasksReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
+export const tasksReducer = (state = initialState, action: ActionType): TasksStateType => {
     switch (action.type) {
         case ADD_TASK: {
             const newTask = {id: v1(), title: action.title, isDone: false}
@@ -84,19 +83,15 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
     }
 }
 
-
 export const addTaskAC = (title: string, todoListID: string): addTaskAT => {
     return {type: ADD_TASK, title, todoListID: todoListID}
 }
-
 export const removeTaskAC = (taskID: string, todoListID: string): RemoveTaskAT => {
     return {type: REMOVE_TASK, taskID, todoListID}
 }
-
 export const changeTaskStatusAC = (taskID: string, isDone: boolean, todoListID: string): ChangeTaskStatusAT => {
     return {type: CHANGE_TASK_STATUS, taskID, isDone, todoListID}
 }
-
 export const changeTaskTitleAC = (taskID: string, title: string, todoListID: string): ChangeTaskTitleAT => {
     return {type: CHANGE_TASK_TITLE, taskID, title, todoListID}
 }
