@@ -1,18 +1,12 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import './App.css';
 import TodoList from "./Components/Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./Components/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {
-    addTodolistAC,
-    changeTodolistFilterAC,
-    changeTodoListTitleAC,
-    removeTodoListAC,
-    todolistsReducer
-} from "./store/todolist-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./store/tasks-reducer";
+import {addTodolistAC, changeTodolistFilterAC, changeTodoListTitleAC, removeTodoListAC} from "./store/todolist-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./store/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./store/store";
 import {TasksStateType} from "./App";
@@ -34,33 +28,10 @@ export type TodoListType = {
 
 //C-R-U-D
 function AppWithRedux() {
-    const todoListID_1 = v1()
-    const todoListID_2 = v1()
 
     const todoLists = useSelector<AppRootStateType, Array<TodoListType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-
     const dispatch = useDispatch()
-
-    // let [todoLists, dispatchToTodoLists] = useReducer(todolistsReducer, [
-    //     {id: todoListID_1, title: 'What to learn', filter: 'all'},
-    //     {id: todoListID_2, title: 'What to buy', filter: 'all'}
-    // ])
-    //
-    // const [tasks, dispatchToTasks] = useReducer(tasksReducer,
-    //     {
-    //         [todoListID_1]: [
-    //             {id: v1(), title: "HTML", isDone: true},
-    //             {id: v1(), title: "CSS", isDone: true},
-    //             {id: v1(), title: "JS/TS", isDone: false}
-    //         ],
-    //         [todoListID_2]: [
-    //             {id: v1(), title: "Meat", isDone: true},
-    //             {id: v1(), title: "Milk", isDone: true},
-    //             {id: v1(), title: "Beer", isDone: false}
-    //         ]
-    //     }
-    // )
 
     //BLL:
 
@@ -141,6 +112,9 @@ function AppWithRedux() {
                 <Toolbar style={{justifyContent: "space-between"}}>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
+                        <Typography variant="h6">
+                            News
+                        </Typography>
                     </IconButton>
                     <Typography variant="h6">
                         Todolists

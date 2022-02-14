@@ -33,6 +33,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     return (
         <div style={{textAlign: 'center'}}>
             <TextField
+                error={error}
                 variant={'outlined'}
                 size={'small'}
                 label={'Enter new item'}
