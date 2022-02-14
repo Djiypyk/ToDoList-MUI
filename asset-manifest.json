@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/incubator-todo/static/css/main.6b5b00ab.chunk.css",
-    "main.js": "/incubator-todo/static/js/main.62b2d1e1.chunk.js",
-    "main.js.map": "/incubator-todo/static/js/main.62b2d1e1.chunk.js.map",
+    "main.js": "/incubator-todo/static/js/main.834d8a07.chunk.js",
+    "main.js.map": "/incubator-todo/static/js/main.834d8a07.chunk.js.map",
     "runtime-main.js": "/incubator-todo/static/js/runtime-main.fd0e4130.js",
     "runtime-main.js.map": "/incubator-todo/static/js/runtime-main.fd0e4130.js.map",
-    "static/js/2.0a066cd9.chunk.js": "/incubator-todo/static/js/2.0a066cd9.chunk.js",
-    "static/js/2.0a066cd9.chunk.js.map": "/incubator-todo/static/js/2.0a066cd9.chunk.js.map",
+    "static/js/2.92ad16a5.chunk.js": "/incubator-todo/static/js/2.92ad16a5.chunk.js",
+    "static/js/2.92ad16a5.chunk.js.map": "/incubator-todo/static/js/2.92ad16a5.chunk.js.map",
     "index.html": "/incubator-todo/index.html",
-    "precache-manifest.c091a44c2e0824a6bc58e32ae3adcecb.js": "/incubator-todo/precache-manifest.c091a44c2e0824a6bc58e32ae3adcecb.js",
+    "precache-manifest.0d98ff6bce00bd07e2c864dee85aacc1.js": "/incubator-todo/precache-manifest.0d98ff6bce00bd07e2c864dee85aacc1.js",
     "service-worker.js": "/incubator-todo/service-worker.js",
     "static/css/main.6b5b00ab.chunk.css.map": "/incubator-todo/static/css/main.6b5b00ab.chunk.css.map",
-    "static/js/2.0a066cd9.chunk.js.LICENSE.txt": "/incubator-todo/static/js/2.0a066cd9.chunk.js.LICENSE.txt"
+    "static/js/2.92ad16a5.chunk.js.LICENSE.txt": "/incubator-todo/static/js/2.92ad16a5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.fd0e4130.js",
-    "static/js/2.0a066cd9.chunk.js",
+    "static/js/2.92ad16a5.chunk.js",
     "static/css/main.6b5b00ab.chunk.css",
-    "static/js/main.62b2d1e1.chunk.js"
+    "static/js/main.834d8a07.chunk.js"
   ]
 }
