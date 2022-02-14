@@ -57,14 +57,15 @@ function AppWithRedux() {
     const changeTodoListTitle = (title: string, todoListID: string) => {
         dispatch(changeTodoListTitleAC(title, todoListID))
     }
-    const addTodoList = (title: string) => {
-        let action = addTodolistAC(title)
-        dispatch(action)
-    }
+
     const changeTodoListFilter = (filter: FilterValuesType, todoListID: string) => {
         dispatch(changeTodolistFilterAC(todoListID, filter))
     }
 
+
+    const addTodoList = (title: string) => {
+        dispatch(addTodolistAC(title))
+    }
 
     const getTasksForRender = (filter: FilterValuesType, tasks: Array<TaskType>): Array<TaskType> => {
         switch (filter) {
