@@ -15,7 +15,7 @@ type TodoListPropsType = {
 }
 
 const TodoList1 = (props: TodoListPropsType) => {
-    console.log('Todolist render')
+
     const dispatch = useDispatch()
     const todolist = useSelector<AppRootStateType, TodoListType>(state => state.todolists
         .filter(todo => todo.id === props.id)[0])

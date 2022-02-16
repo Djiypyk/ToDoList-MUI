@@ -63,7 +63,7 @@ function AppWithRedux() {
         dispatch(addTodolistAC(title))
     }, [])
 
-    const todoListComps = todoLists.map(tl => {
+    const todoListJSX = todoLists.map(tl => {
         return (
             <Grid item key={tl.id}>
                 <Paper elevation={5}
@@ -103,7 +103,7 @@ function AppWithRedux() {
                         </Typography>
                     </IconButton>
                     <Typography variant="h6">
-                        Todolists
+                        TodoLists
                     </Typography>
                     <Button color="inherit" variant={"outlined"}>Login</Button>
                 </Toolbar>
@@ -113,7 +113,7 @@ function AppWithRedux() {
                     <AddItemForm addItem={addTodoList}/>
                 </Grid>
                 <Grid container spacing={4} justifyContent={"center"}>
-                    {todoListComps}
+                    {todoListJSX}
                 </Grid>
             </Container>
         </div>
