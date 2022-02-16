@@ -16,7 +16,7 @@ export type TodoListType = {
 }
 
 function AppWithRedux() {
-
+    console.log('App Render')
     const todoLists = useSelector<AppRootStateType, Array<TodoListType>>(state => state.todolists)
     const dispatch = useDispatch()
 
@@ -36,7 +36,7 @@ function AppWithRedux() {
                         </Typography>
                     </IconButton>
                     <Typography variant="h6">
-                        Todolists
+                        TodoLists
                     </Typography>
                     <Button color="inherit" variant={"outlined"}>Login</Button>
                 </Toolbar>
