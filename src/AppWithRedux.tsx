@@ -34,34 +34,34 @@ function AppWithRedux() {
 //tasks:
     const removeTask = useCallback((taskID: string, todoListID: string) => {
         dispatch(removeTaskAC(taskID, todoListID))
-    }, [])
+    }, [dispatch])
     const addTask = useCallback((title: string, todoListID: string) => {
         dispatch(addTaskAC(title, todoListID))
     }, [dispatch])
     const changeTaskStatus = useCallback((taskID: string, isDone: boolean, todoListID: string) => {
         dispatch(changeTaskStatusAC(taskID, isDone, todoListID))
-    }, [])
+    }, [dispatch])
     const changeTasksTitle = useCallback((taskID: string, title: string, todoListID: string) => {
         dispatch(changeTaskTitleAC(taskID, title, todoListID))
-    }, [])
+    }, [dispatch])
 
 //todoLists:
     const removeTodoList = useCallback((todoListID: string) => {
         let action = removeTodoListAC(todoListID)
         dispatch(action)
-    }, [])
+    }, [dispatch])
     const changeTodoListTitle = useCallback((title: string, todoListID: string) => {
         dispatch(changeTodoListTitleAC(title, todoListID))
-    }, [])
+    }, [dispatch])
 
     const changeTodoListFilter = useCallback((filter: FilterValuesType, todoListID: string) => {
         dispatch(changeTodolistFilterAC(todoListID, filter))
-    }, [])
+    }, [dispatch])
 
 
     const addTodoList = useCallback((title: string) => {
         dispatch(addTodolistAC(title))
-    }, [])
+    }, [dispatch])
 
     const todoListJSX = todoLists.map(tl => {
         return (

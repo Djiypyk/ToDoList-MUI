@@ -4,7 +4,7 @@ import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Button, ButtonGroup, Grid, IconButton, List, Typography} from "@material-ui/core";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
-import {Task1} from "./Task1";
+import {Task} from "./Task";
 
 type TodoListPropsType = {
     title: string
@@ -39,13 +39,16 @@ const TodoList = React.memo((props: TodoListPropsType) => {
     }
 
     const tasksList = tasksForTodoList.map((t) => {
-        return <Task1 key={t.id} taskId={t.id} todoListID={props.todoListID}/>
-        // <Task key={props.todoListID}
-        //              todoListID={props.todoListID}
-        //              task={t}
-        //              removeTask={props.removeTask}
-        //              changeTaskStatus={props.changeTaskStatus}
-        //              changeTasksTitle={props.changeTasksTitle}/>
+        return <>
+            {/*<Task1 key={t.id} taskId={t.id} todoListID={props.todoListID}/>*/}
+            <Task key={props.todoListID}
+                  todoListID={props.todoListID}
+                  task={t}
+                  removeTask={props.removeTask}
+                  changeTaskStatus={props.changeTaskStatus}
+                  changeTasksTitle={props.changeTasksTitle}/>
+
+        </>
     })
 
     const onClickSetAllFilter = useCallback(() => props.changeTodoListFilter("all", props.todoListID),
