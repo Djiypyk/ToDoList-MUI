@@ -1,5 +1,6 @@
+import { v1 } from "uuid";
 import {FilterValuesType, TodoListType} from "../App";
-import {v1} from "uuid";
+
 
 export const CHANGE_TODO_LIST_TITLE = 'CHANGE-TODOLIST-TITLE'
 export const REMOVE_TODOLIST = 'REMOVE-TODOLIST'
