@@ -1,14 +1,14 @@
 import React, {ChangeEvent, useCallback} from "react";
-import {TaskType} from "../AppWithRedux";
 import {Checkbox, IconButton, ListItem} from "@material-ui/core";
 import {EditableSpan} from "./EditableSpan";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
+import {TaskStatuses, TaskType} from "../api/todolists-api";
 
 export type TaskPropsType = {
     todoListID: string
     task: TaskType
     removeTask: (id: string, todoListID: string) => void
-    changeTaskStatus: (id: string, isDone: boolean, todoListID: string) => void
+    changeTaskStatus: (id: string, status: TaskStatuses, todoListID: string) => void
     changeTasksTitle: (taskID: string, title: string, todoListID: string) => void
 }
 
@@ -31,7 +31,7 @@ export const Task = React.memo(({
     return <ListItem key={task.id} divider
                      style={{display: 'flex', justifyContent: 'space-between'}}>
         <Checkbox
-            checked={task.isDone}
+            checked={task.completed}
             onChange={changeStatus}
         />
         <EditableSpan title={task.title} changeTitle={changeTaskTitle}/>
