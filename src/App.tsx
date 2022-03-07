@@ -95,7 +95,7 @@ function App() {
                 id: v1(), title, status: TaskStatuses.New,
                 addedDate: '', todoListId: todoListID, startDate: '',
                 deadline: '', order: 0, description: '',
-                priority: TaskPriorities.Hi, completed: true
+                priority: TaskPriorities.Hi, completed: false
             }, ...tasks[todoListID]]
         })
     }
@@ -129,9 +129,9 @@ function App() {
     const getTasksForRender = (filter: FilterValuesType, tasks: Array<TaskType>): Array<TaskType> => {
         switch (filter) {
             case "completed":
-                return tasks.filter(t => t.completed)
+                return tasks.filter(t => t.status === TaskStatuses.Completed)
             case "active":
-                return tasks.filter(t => !t.completed)
+                return tasks.filter(t => t.status === TaskStatuses.New)
             default:
                 return tasks
         }
@@ -192,5 +192,3 @@ function App() {
 }
 
 export default App;
-
-

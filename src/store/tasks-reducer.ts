@@ -1,6 +1,7 @@
 import {TasksStateType} from "../App";
 import {v1} from "uuid";
 import {ADD_NEW_TODOLIST, AddTodoListAT, REMOVE_TODOLIST, RemoveTodoListAT} from "./todolist-reducer";
+import {TaskPriorities, TaskStatuses} from "../api/todolists-api";
 
 export const CHANGE_TASK_TITLE = 'CHANGE-TASK-TITLE'
 export const REMOVE_TASK = 'REMOVE-TASK'
@@ -21,7 +22,7 @@ type RemoveTaskAT = {
 type ChangeTaskStatusAT = {
     type: typeof CHANGE_TASK_STATUS
     taskID: string
-    isDone: boolean
+    status: TaskStatuses
     todoListID: string
 }
 
@@ -43,7 +44,10 @@ const initialState: TasksStateType = {}
 export const tasksReducer = (state = initialState, action: ActionType): TasksStateType => {
     switch (action.type) {
         case ADD_TASK: {
-            const newTask = {id: v1(), title: action.title, isDone: false}
+            const newTask = {id: v1(), title: action.title, status: TaskStatuses.New,
+                addedDate: '', todoListId: action.todoListID, startDate: '',
+                deadline: '', order: 0, description: '',
+                priority: TaskPriorities.Hi, completed: false}
             return {
                 ...state, [action.todoListID]: [
                     newTask, ...state[action.todoListID]]
@@ -58,7 +62,7 @@ export const tasksReducer = (state = initialState, action: ActionType): TasksSta
         case CHANGE_TASK_STATUS: {
             return {
                 ...state, [action.todoListID]: state[action.todoListID]
-                    .map(t => t.id === action.taskID ? {...t, isDone: action.isDone} : t)
+                    .map(t => t.id === action.taskID ? {...t, status: action.status} : t)
             }
         }
         case CHANGE_TASK_TITLE: {
@@ -68,7 +72,7 @@ export const tasksReducer = (state = initialState, action: ActionType): TasksSta
             }
         }
         case ADD_NEW_TODOLIST: {
-            return {...state, [action.newTodoListID]: []}
+            return {...state, [action.id]: []}
         }
         case REMOVE_TODOLIST: {
             const copyState = {...state}
@@ -89,8 +93,8 @@ export const addTaskAC = (title: string, todoListID: string): addTaskAT => {
 export const removeTaskAC = (taskID: string, todoListID: string): RemoveTaskAT => {
     return {type: REMOVE_TASK, taskID, todoListID}
 }
-export const changeTaskStatusAC = (taskID: string, isDone: boolean, todoListID: string): ChangeTaskStatusAT => {
-    return {type: CHANGE_TASK_STATUS, taskID, isDone, todoListID}
+export const changeTaskStatusAC = (taskID: string, status: TaskStatuses, todoListID: string): ChangeTaskStatusAT => {
+    return {type: CHANGE_TASK_STATUS, taskID, status, todoListID}
 }
 export const changeTaskTitleAC = (taskID: string, title: string, todoListID: string): ChangeTaskTitleAT => {
     return {type: CHANGE_TASK_TITLE, taskID, title, todoListID}

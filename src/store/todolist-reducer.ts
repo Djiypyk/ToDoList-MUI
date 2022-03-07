@@ -47,7 +47,6 @@ export const todolistsReducer = (todoListsState = initialState, action: ActionTy
         case CHANGE_TODO_LIST_TITLE:
             return todoListsState.map(t => t.id === action.id ? {...t, title: action.title} : t)
         case ADD_NEW_TODOLIST:
-
             return [...todoListsState, {id: action.id, title: action.title, filter: 'all', addedDate: '', order: 0}]
         case CHANGE_TODOLIST_FILTER:
             return todoListsState.map(tl => tl.id === action.id ? {...tl, filter: action.filter} : tl)
@@ -60,7 +59,6 @@ export const todolistsReducer = (todoListsState = initialState, action: ActionTy
 export const removeTodoListAC = (todolistID: string): RemoveTodoListAT => {
     return {type: REMOVE_TODOLIST, id: todolistID}
 }
-
 
 export const changeTodoListTitleAC = (id: string, title: string): ChangeTodoListAT => {
     return {type: CHANGE_TODO_LIST_TITLE, id: id, title: title}

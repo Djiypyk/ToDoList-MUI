@@ -22,7 +22,8 @@ export const Task = React.memo(({
     const onRemoveTask = useCallback(() => removeTask(task.id, todoListID), [removeTask, task.id, todoListID])
 
     const changeStatus = useCallback((e: ChangeEvent<HTMLInputElement>) =>
-        changeTaskStatus(task.id, e.currentTarget.checked, todoListID), [task.id, todoListID, changeTaskStatus])
+        changeTaskStatus(task.id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New, todoListID),
+        [task.id, todoListID, changeTaskStatus])
 
     const changeTaskTitle = useCallback((newTitle: string) => {
         changeTasksTitle(task.id, newTitle, todoListID)
@@ -31,7 +32,7 @@ export const Task = React.memo(({
     return <ListItem key={task.id} divider
                      style={{display: 'flex', justifyContent: 'space-between'}}>
         <Checkbox
-            checked={task.completed}
+            checked={task.status === TaskStatuses.Completed}
             onChange={changeStatus}
         />
         <EditableSpan title={task.title} changeTitle={changeTaskTitle}/>

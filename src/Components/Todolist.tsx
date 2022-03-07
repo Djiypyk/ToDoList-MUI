@@ -33,10 +33,10 @@ const TodoList = React.memo((props: TodoListPropsType) => {
 
     let tasksForTodoList = props.tasks
     if (props.filter === "active") {
-        tasksForTodoList = tasksForTodoList.filter(t => !t.completed);
+        tasksForTodoList = tasksForTodoList.filter(t => t.status === TaskStatuses.New);
     }
     if (props.filter === "completed") {
-        tasksForTodoList = tasksForTodoList.filter(t => t.completed);
+        tasksForTodoList = tasksForTodoList.filter(t => t.status === TaskStatuses.Completed);
     }
 
     const tasksList = tasksForTodoList.map((t) => {

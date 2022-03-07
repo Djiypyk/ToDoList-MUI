@@ -1,10 +1,12 @@
-import {TasksStateType, TodoListType} from "../App";
-import {addTodolistAC, removeTodoListAC, todolistsReducer} from "./todolist-reducer";
+import {TasksStateType} from "../App";
+import {addTodolistAC, removeTodoListAC, TodoListDomainType, todolistsReducer} from "./todolist-reducer";
 import {tasksReducer} from "./tasks-reducer";
+import {TaskPriorities, TaskStatuses} from "../api/todolists-api";
+import {v1} from "uuid";
 
 test('ids should be equals', () => {
     const startTasksState: TasksStateType = {};
-    const startTodolistsState: Array<TodoListType> = [];
+    const startTodolistsState: Array<TodoListDomainType> = [];
 
     const action = addTodolistAC("new todolist");
 
@@ -15,22 +17,59 @@ test('ids should be equals', () => {
     const idFromTasks = keys[0];
     const idFromTodolists = endTodolistsState[0].id;
 
-    expect(idFromTasks).toBe(action.newTodoListID);
-    expect(idFromTodolists).toBe(action.newTodoListID);
+    expect(idFromTasks).toBe(action.id);
+    expect(idFromTodolists).toBe(action.id);
 });
 
 
 test('property with todolistId should be deleted', () => {
     const startState: TasksStateType = {
-        "todolistId1": [
-            {id: "1", title: "CSS", isDone: false},
-            {id: "2", title: "JS", isDone: true},
-            {id: "3", title: "React", isDone: false}
+        "todolistId1":[
+            {
+                id: v1(), title: "HTML", status: TaskStatuses.Completed,
+                addedDate: '', todoListId: 'todoListID_1', startDate: '',
+                deadline: '', order: 0, description: '',
+                priority: TaskPriorities.Hi, completed: true
+            },
+            {
+                id: v1(), title: "CSS", status: TaskStatuses.Completed,
+                addedDate: '', todoListId: 'todoListID_1', startDate: '',
+                deadline: '', order: 0, description: '',
+                priority: TaskPriorities.Hi, completed: true
+            },
+            {
+                id: v1(),
+                title: "JS/TS",
+                status: TaskStatuses.New,
+                addedDate: '',
+                todoListId: 'todoListID_1',
+                startDate: '',
+                deadline: '',
+                order: 0,
+                description: '',
+                priority: TaskPriorities.Hi,
+                completed: false
+            }
         ],
         "todolistId2": [
-            {id: "1", title: "bread", isDone: false},
-            {id: "2", title: "milk", isDone: true},
-            {id: "3", title: "tea", isDone: false}
+            {
+                id: v1(), title: "Meat", status: TaskStatuses.Completed,
+                addedDate: '', todoListId: 'todoListID_2', startDate: '',
+                deadline: '', order: 0, description: '',
+                priority: TaskPriorities.Hi, completed: true
+            },
+            {
+                id: v1(), title: "Milk", status: TaskStatuses.Completed,
+                addedDate: '', todoListId: 'todoListID_2', startDate: '',
+                deadline: '', order: 0, description: '',
+                priority: TaskPriorities.Hi, completed: true
+            },
+            {
+                id: v1(), title: "Beer", status: TaskStatuses.New,
+                addedDate: '', todoListId: 'todoListID_2', startDate: '',
+                deadline: '', order: 0, description: '',
+                priority: TaskPriorities.Hi, completed: false
+            }
         ]
     };
 

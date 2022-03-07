@@ -5,6 +5,6 @@
 .active-filter {
     background-color: aquamarine;
 }
-.isDone {
+.status: TaskStatuses.Completed {
  opacity: 0.5;
 }
