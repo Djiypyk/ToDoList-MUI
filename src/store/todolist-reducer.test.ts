@@ -68,9 +68,7 @@ test('correct todolist should change its name', () => {
 
 test('correct filter of todolist should be changed', () => {
 
-
     let newFilter: FilterValuesType = "completed";
-
 
     const action: ActionType = {
         type: 'CHANGE-TODOLIST-FILTER',
