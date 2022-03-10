@@ -23,11 +23,11 @@ type TodoListPropsType = {
     changeTodoListTitle: (title: string, todoListID: string) => void
 }
 
-const TodoList = React.memo((props: TodoListPropsType) => {
+const TodoList = React.memo<TodoListPropsType>((props) => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getTasksTC(props.todoListID))
-    }, [])
+    }, [dispatch, props.todoListID])
 
     const addTask = useCallback((title: string) => {
         props.addTask(title, props.todoListID);
