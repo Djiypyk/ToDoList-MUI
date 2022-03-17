@@ -15,13 +15,18 @@ import {
 } from "./store/todolist-reducer";
 import {createTasksTC, removeTasksTC, updateTasksStatusTC, updateTasksTitleTC} from "./store/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./store/store";
+import {AppRootStateType, useAppSelector} from "./store/store";
 import {TasksStateType} from "./App";
 import {TaskStatuses} from "./api/todolists-api";
+import {RequestStatusType} from "./store/app-reducer";
+import LinearProgress from '@mui/material/LinearProgress';
+import {ErrorSnackbar} from "./Components/ErrorSnackbar/ErrorSnackbar";
 
 
 //C-R-U-D
 function AppWithRedux() {
+
+    const status = useAppSelector<RequestStatusType>((state) => state.app.status)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -110,6 +115,7 @@ function AppWithRedux() {
                     <Button color="inherit" variant={"outlined"}>Login</Button>
                 </Toolbar>
             </AppBar>
+            {status === 'loading' && <LinearProgress color={'secondary'}/>}
             <Container fixed>
                 <Grid container justifyContent={"center"} style={{padding: '15px'}}>
                     <AddItemForm addItem={addTodoList}/>
@@ -118,6 +124,7 @@ function AppWithRedux() {
                     {todoListJSX}
                 </Grid>
             </Container>
+            <ErrorSnackbar/>
         </div>
     )
 }
