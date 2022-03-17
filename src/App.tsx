@@ -27,8 +27,8 @@ function App() {
 
 
     const [todoLists, setTodoLists] = useState<Array<TodoListDomainType>>([
-        {id: todoListID_1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
-        {id: todoListID_2, title: 'What to buy', filter: 'all', addedDate: '', order: 1}
+        {id: todoListID_1, title: 'What to learn', filter: 'all', addedDate: '', order: 0, entityStatus: 'idle'},
+        {id: todoListID_2, title: 'What to buy', filter: 'all', addedDate: '', order: 1, entityStatus: 'idle'}
     ])
 
     const [tasks, setTasks] = useState<TasksStateType>(
@@ -118,7 +118,14 @@ function App() {
     }
     const addTodoList = (title: string) => {
         const newTodoListID = v1()
-        setTodoLists([...todoLists, {id: newTodoListID, title, filter: 'all', addedDate: '', order: 0}])
+        setTodoLists([...todoLists, {
+            id: newTodoListID,
+            title,
+            filter: 'all',
+            addedDate: '',
+            order: 0,
+            entityStatus: 'idle'
+        }])
         setTasks({...tasks, [newTodoListID]: []})
     }
     const changeTodoListFilter = (filter: FilterValuesType, todoListID: string) => {
@@ -151,6 +158,7 @@ function App() {
                             todoListID={tl.id}
                             filter={tl.filter}
                             title={tl.title}
+                            entityStatus={tl.entityStatus}
                             tasks={getTasksForRender(tl.filter, tasks[tl.id])}
                             addTask={addTask}
                             removeTask={removeTask}

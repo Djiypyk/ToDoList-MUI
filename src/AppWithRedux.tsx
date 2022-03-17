@@ -83,6 +83,7 @@ function AppWithRedux() {
                         <TodoList
                             todoListID={tl.id}
                             filter={tl.filter}
+                            entityStatus={tl.entityStatus}
                             title={tl.title}
                             tasks={tasks[tl.id]}
                             addTask={addTask}
