@@ -166,7 +166,6 @@ export const updateTasksStatusTC = (
     todoListID: string) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
     const currentTask = getState().tasks[todoListID].find((t) => t.id === taskID)
 
-
     if (currentTask) {
         const model: UpdateTaskType = {
             title: currentTask.title,
@@ -181,12 +180,16 @@ export const updateTasksStatusTC = (
         dispatch(setAppStateAC('loading'))
         todolistsAPI.updateTask(todoListID, taskID, model)
             .then((res) => {
-                dispatch(updateTaskStatusAC(taskID, status, todoListID))
-                dispatch(setAppStateAC('succeeded'))
+                if (res.data.resultCode === 0) {
+                    dispatch(updateTaskStatusAC(taskID, status, todoListID))
+                    dispatch(setAppStateAC('succeeded'))
+                } else {
+                    handleServerAppError(dispatch, res.data)
+                }
             })
             .catch((err: AxiosError) => {
-                dispatch(setAppErrorAC(err.message))
-                dispatch(setAppStateAC('failed'))
+                handleServerNetworkError(dispatch, err.message)
+
             })
     }
 }
@@ -209,10 +212,19 @@ export const updateTasksTitleTC = (
             startDate: currentTask.startDate
 
         }
-
+        dispatch(setAppStateAC('loading'))
         todolistsAPI.updateTask(todoListID, taskID, model)
             .then((res) => {
-                dispatch(updateTaskTitleAC(taskID, title, todoListID))
+                if (res.data.resultCode === 0) {
+                    dispatch(updateTaskTitleAC(taskID, title, todoListID))
+                    dispatch(setAppStateAC('succeeded'))
+                } else {
+                    handleServerAppError(dispatch, res.data)
+                }
+            })
+            .catch((err: AxiosError) => {
+                handleServerNetworkError(dispatch, err.message)
+
             })
     }
 }
