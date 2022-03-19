@@ -6,9 +6,9 @@ import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined"
 import {Task} from "./Task";
 import {TaskStatuses, TaskType} from "../api/todolists-api";
 import {FilterValuesType} from "../store/todolist-reducer";
-import {useDispatch} from "react-redux";
 import {getTasksTC} from "../store/tasks-reducer";
 import {RequestStatusType} from "../store/app-reducer";
+import {useDispatch} from "react-redux";
 
 type TodoListPropsType = {
     title: string
@@ -27,6 +27,7 @@ type TodoListPropsType = {
 
 const TodoList = React.memo<TodoListPropsType>((props) => {
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(getTasksTC(props.todoListID))
     }, [dispatch, props.todoListID])
