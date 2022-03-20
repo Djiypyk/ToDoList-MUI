@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {TodoListDomainType} from "../store/todolist-reducer";
+import {TodoListDomainType} from "../Features/TodoListsList/todolist-reducer";
 
 const axiosInstance = axios.create({
     withCredentials: true,

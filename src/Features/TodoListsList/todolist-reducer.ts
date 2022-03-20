@@ -1,8 +1,8 @@
-import {todolistsAPI, TodoListType} from "../api/todolists-api";
+import {todolistsAPI, TodoListType} from "../../api/todolists-api";
 import {Dispatch} from "redux";
-import {RequestStatusType, setAppStateAC, SetErrorAT, SetStatusAT} from "./app-reducer";
+import {RequestStatusType, setAppStateAC, SetErrorAT, SetStatusAT} from "../../App/app-reducer";
 import {AxiosError} from "axios";
-import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
+import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 
 
 const initialState: Array<TodoListDomainType> = []
@@ -60,7 +60,7 @@ export const getTodosTC = () => (dispatch: Dispatch<ActionType>): void => {
             dispatch(setAppStateAC('succeeded'))
         })
 }
-export const removeTodoListTC = (id: string) => (dispatch: Dispatch) => {
+export const removeTodoListTC = (id: string) => (dispatch: Dispatch<ActionType>) => {
     dispatch(setAppStateAC('loading'))
     dispatch(changeTodolistEntityStatusAC(id, 'loading'))
     todolistsAPI.deleteTodolist(id)
@@ -92,7 +92,7 @@ export const createTodoListTC = (title: string) => (dispatch: Dispatch<ActionTyp
         })
 }
 
-export const updateTodoListTitleTC = (title: string, id: string) => (dispatch: Dispatch) => {
+export const updateTodoListTitleTC = (title: string, id: string) => (dispatch: Dispatch<ActionType>) => {
     dispatch(setAppStateAC('loading'))
     todolistsAPI.updateTodolistTitle(title, id)
         .then((res) => {
