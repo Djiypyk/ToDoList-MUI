@@ -4,13 +4,15 @@ import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunk from "redux-thunk";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {appReducer} from "./app-reducer";
+import {authReducer} from "../Features/Login/auth-reducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
-    app: appReducer
+    app: appReducer,
+    auth: authReducer
 })
 // непосредственно создаём store
 export const store = createStore(rootReducer, applyMiddleware(thunk));

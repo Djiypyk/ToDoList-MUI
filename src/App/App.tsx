@@ -1,19 +1,45 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {AppBar, Button, Container, IconButton, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Button, CircularProgress, Container, IconButton, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
-import {useAppSelector} from "./store";
-import {RequestStatusType} from "./app-reducer";
+import {AppRootStateType, useAppSelector} from "./store";
+import {initializedAppTC, RequestStatusType} from "./app-reducer";
 import LinearProgress from '@mui/material/LinearProgress';
 import {ErrorSnackbar} from "../Components/ErrorSnackbar/ErrorSnackbar";
 import {TodoListsList} from "../Features/TodoListsList/TodoListsList";
+import {Navigate, Route, Routes} from 'react-router-dom';
+import {Login} from "../Features/Login/Login";
+import {useDispatch, useSelector} from "react-redux";
+import {logOutTC} from '../Features/Login/auth-reducer';
 
+
+type PropsType = {
+    demo?: boolean
+}
 
 //C-R-U-D
-function AppWithRedux() {
+function AppWithRedux({demo = false}: PropsType) {
     const status = useAppSelector<RequestStatusType>((state) => state.app.status)
+    const isInitialized = useAppSelector<boolean>((state) => state.app.isInitialized)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(initializedAppTC())
+    }, [])
+
+    const logoutHandler = useCallback(() => {
+        dispatch(logOutTC())
+    }, [])
 
     //UI:
+    if (!isInitialized) {
+        return <div style={{width: '100%', position: 'fixed', top: '40%', left: '50%'}}>
+            <CircularProgress/>
+        </div>
+    }
+
     return (
         <div className="App">
             <AppBar position="static">
@@ -27,12 +53,20 @@ function AppWithRedux() {
                     <Typography variant="h6">
                         TodoLists
                     </Typography>
-                    <Button color="inherit" variant={"outlined"}>Login</Button>
+                    {isLoggedIn &&
+                    <Button color="inherit" variant={"outlined"} onClick={logoutHandler}>
+                        Log Out
+                    </Button>}
                 </Toolbar>
             </AppBar>
             {status === 'loading' && <LinearProgress color={'secondary'}/>}
             <Container fixed>
-                <TodoListsList/>
+                <Routes>
+                    <Route path="/" element={<TodoListsList demo={demo}/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/404" element={<h1>404: PAGE NOT FOUND</h1>}/>
+                    <Route path="*" element={<Navigate to='/404'/>}/>
+                </Routes>
             </Container>
             <ErrorSnackbar/>
         </div>

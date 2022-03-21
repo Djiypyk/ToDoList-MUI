@@ -23,12 +23,17 @@ type TodoListPropsType = {
     changeTasksTitle: (taskID: string, title: string, todoListID: string) => void
     changeTodoListTitle: (title: string, todoListID: string) => void
     entityStatus: RequestStatusType
+    demo?: boolean
 }
 
-const TodoList = React.memo<TodoListPropsType>((props) => {
+const TodoList = React.memo<TodoListPropsType>(({demo = false, ...props}) => {
     const dispatch = useDispatch()
 
+
     useEffect(() => {
+        if (demo) {
+            return
+        }
         dispatch(getTasksTC(props.todoListID))
     }, [dispatch, props.todoListID])
 

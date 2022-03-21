@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 const initialGlobalState: AppRootStateType = {
     todolists: [
         {id: "todolistId1", title: "What to learn", filter: "all", addedDate: '', order: 0, entityStatus: 'idle'},
-        {id: "todolistId2", title: "What to buy", filter: "all", addedDate: '', order: 1, entityStatus:'idle'}
+        {id: "todolistId2", title: "What to buy", filter: "all", addedDate: '', order: 1, entityStatus: 'idle'}
     ],
     tasks: {
         ["todolistId1"]: [
@@ -66,7 +66,8 @@ const initialGlobalState: AppRootStateType = {
             }
         ]
     },
-    app: {status: 'idle' , error: null}
+    app: {status: 'idle', error: null, isInitialized: false},
+    auth: {isLoggedIn: false}
 };
 
 export const storyBookStore = createStore(rootReducer, initialGlobalState);

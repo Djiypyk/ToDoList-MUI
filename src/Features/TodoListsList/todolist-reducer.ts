@@ -59,6 +59,9 @@ export const getTodosTC = () => (dispatch: Dispatch<ActionType>): void => {
             dispatch(getTodosAC(res.data))
             dispatch(setAppStateAC('succeeded'))
         })
+        .catch((err: AxiosError) => {
+            handleServerNetworkError(dispatch, err.message)
+        })
 }
 export const removeTodoListTC = (id: string) => (dispatch: Dispatch<ActionType>) => {
     dispatch(setAppStateAC('loading'))
@@ -73,6 +76,9 @@ export const removeTodoListTC = (id: string) => (dispatch: Dispatch<ActionType>)
                 handleServerAppError(dispatch, res.data)
             }
             dispatch(setAppStateAC('succeeded'))
+        })
+        .catch((err: AxiosError) => {
+            handleServerNetworkError(dispatch, err.message)
         })
 }
 
@@ -98,6 +104,9 @@ export const updateTodoListTitleTC = (title: string, id: string) => (dispatch: D
         .then((res) => {
             dispatch(updateTodoListTitleAC(id, title))
             dispatch(setAppStateAC('succeeded'))
+        })
+        .catch((err: AxiosError) => {
+            handleServerNetworkError(dispatch, err.message)
         })
 
 }
