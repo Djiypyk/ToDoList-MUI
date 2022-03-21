@@ -47,16 +47,18 @@ function AppWithRedux({demo = false}: PropsType) {
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
                         <Typography variant="h6">
-                            News
+                            Menu
                         </Typography>
                     </IconButton>
                     <Typography variant="h6">
                         TodoLists
                     </Typography>
-                    {isLoggedIn &&
+                    {isLoggedIn ?
                     <Button color="inherit" variant={"outlined"} onClick={logoutHandler}>
                         Log Out
-                    </Button>}
+                    </Button> : <Button color="inherit" variant={"outlined"} onClick={logoutHandler}>
+                            Log In
+                        </Button>}
                 </Toolbar>
             </AppBar>
             {status === 'loading' && <LinearProgress color={'secondary'}/>}
