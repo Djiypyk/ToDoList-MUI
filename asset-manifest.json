@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/incubator-todo/static/css/main.c3297911.css",
-    "main.js": "/incubator-todo/static/js/main.238d06ea.js",
+    "main.js": "/incubator-todo/static/js/main.50905742.js",
     "index.html": "/incubator-todo/index.html",
     "main.c3297911.css.map": "/incubator-todo/static/css/main.c3297911.css.map",
-    "main.238d06ea.js.map": "/incubator-todo/static/js/main.238d06ea.js.map"
+    "main.50905742.js.map": "/incubator-todo/static/js/main.50905742.js.map"
   },
   "entrypoints": [
     "static/css/main.c3297911.css",
-    "static/js/main.238d06ea.js"
+    "static/js/main.50905742.js"
   ]
 }
