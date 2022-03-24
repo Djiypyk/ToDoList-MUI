@@ -54,15 +54,12 @@ const TodoList = React.memo<TodoListPropsType>(({demo = false, ...props}) => {
     }
 
     const tasksList = tasksForTodoList.map((t) => {
-        return <>
-            <Task key={props.todoListID}
-                  todoListID={props.todoListID}
-                  task={t}
-                  removeTask={props.removeTask}
-                  changeTaskStatus={props.changeTaskStatus}
-                  changeTasksTitle={props.changeTasksTitle}/>
-
-        </>
+        return <Task key={t.id}
+                     todoListID={props.todoListID}
+                     task={t}
+                     removeTask={props.removeTask}
+                     changeTaskStatus={props.changeTaskStatus}
+                     changeTasksTitle={props.changeTasksTitle}/>
     })
 
     const onClickSetAllFilter = useCallback(() => props.changeTodoListFilter("all", props.todoListID),
@@ -117,7 +114,6 @@ const TodoList = React.memo<TodoListPropsType>(({demo = false, ...props}) => {
                         </Button>
                     </ButtonGroup>
                 </div>
-
             </div>
         </Grid>
 

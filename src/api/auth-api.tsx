@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 
 const axiosInstance = axios.create({
@@ -9,15 +9,14 @@ const axiosInstance = axios.create({
     }
 })
 
-
 // API
 
 export const authAPI = {
     login(data: LoginParamsType) {
-        return axiosInstance.post<ResponseType<{ userId?: number }>>('login', data)
+        return axiosInstance.post<LoginParamsType, AxiosResponse<ResponseType<{ userId: number }>>>('login', data)
     },
     me() {
-        return axiosInstance.get<ResponseType<{ id: number, email: string, login: string }>>('me')
+        return axiosInstance.get<ResponseType<MeResponseType>>('me')
     },
     loginOut() {
         return axiosInstance.delete<ResponseType<{ userId?: number }>>('login')
@@ -25,6 +24,13 @@ export const authAPI = {
 }
 
 // Types
+
+type MeResponseType = {
+    id: number
+    email: string
+    login: string
+}
+
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
@@ -35,5 +41,5 @@ export type LoginParamsType = {
     email: string
     password: string
     rememberMe: boolean
-    captcha?: boolean
+    captcha?: string
 }

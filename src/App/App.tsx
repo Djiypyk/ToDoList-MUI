@@ -7,7 +7,7 @@ import {initializedAppTC, RequestStatusType} from "./app-reducer";
 import LinearProgress from '@mui/material/LinearProgress';
 import {ErrorSnackbar} from "../Components/ErrorSnackbar/ErrorSnackbar";
 import {TodoListsList} from "../Features/TodoListsList/TodoListsList";
-import {Navigate, Route, Routes} from 'react-router-dom';
+import {Navigate, NavLink, Route, Routes} from 'react-router-dom';
 import {Login} from "../Features/Login/Login";
 import {useDispatch, useSelector} from "react-redux";
 import {logOutTC} from '../Features/Login/auth-reducer';
@@ -27,11 +27,11 @@ function AppWithRedux({demo = false}: PropsType) {
 
     useEffect(() => {
         dispatch(initializedAppTC())
-    }, [])
+    }, [dispatch])
 
     const logoutHandler = useCallback(() => {
         dispatch(logOutTC())
-    }, [])
+    }, [dispatch])
 
     //UI:
     if (!isInitialized) {
@@ -51,12 +51,13 @@ function AppWithRedux({demo = false}: PropsType) {
                         </Typography>
                     </IconButton>
                     <Typography variant="h6">
-                        TodoLists
+                        <NavLink className='todolist_link' to={'/'}>TodoLists</NavLink>
                     </Typography>
-                    {isLoggedIn ?
-                    <Button color="inherit" variant={"outlined"} onClick={logoutHandler}>
-                        Log Out
-                    </Button> : <Button color="inherit" variant={"outlined"} onClick={logoutHandler}>
+                    {isLoggedIn
+                        ? <Button color="inherit" variant={"outlined"} onClick={logoutHandler}>
+                            Log Out
+                        </Button>
+                        : <Button color="inherit" variant={"outlined"} onClick={logoutHandler}>
                             Log In
                         </Button>}
                 </Toolbar>
@@ -65,9 +66,10 @@ function AppWithRedux({demo = false}: PropsType) {
             <Container fixed>
                 <Routes>
                     <Route path="/" element={<TodoListsList demo={demo}/>}/>
-                    <Route path="/login" element={<Login/>}/>
-                    <Route path="/404" element={<h1>404: PAGE NOT FOUND</h1>}/>
-                    <Route path="*" element={<Navigate to='/404'/>}/>
+                    <Route path="login" element={<Login/>}/>
+                    <Route path="404"
+                           element={<h1 style={{width: '100%', textAlign: 'center'}}>404: PAGE NOT FOUND</h1>}/>
+                    <Route path="*" element={<Navigate to='404'/>}/>
                 </Routes>
             </Container>
             <ErrorSnackbar/>

@@ -34,7 +34,7 @@ export const TodoListsList: React.FC<PropsType> = ({demo = false}) => {
             return;
         }
         dispatch(getTodosTC())
-    }, [])
+    }, [dispatch, demo, isLoggedIn])
 
 //tasks:
     const removeTask = useCallback((taskID: string, todoListID: string) => {
@@ -46,7 +46,6 @@ export const TodoListsList: React.FC<PropsType> = ({demo = false}) => {
     const changeTaskStatus = useCallback((taskID: string, status: TaskStatuses, todoListID: string) => {
         dispatch(updateTasksStatusTC(taskID, status, todoListID))
     }, [dispatch])
-
     const changeTasksTitle = useCallback((taskID: string, title: string, todoListID: string) => {
         dispatch(updateTasksTitleTC(taskID, title, todoListID))
         dispatch(updateTasksTitleTC(taskID, title, todoListID))
@@ -63,14 +62,11 @@ export const TodoListsList: React.FC<PropsType> = ({demo = false}) => {
     const changeTodoListFilter = useCallback((filter: FilterValuesType, todoListID: string) => {
         dispatch(changeTodolistFilterAC(todoListID, filter))
     }, [dispatch])
-
     const addTodoList = useCallback((title: string) => {
         dispatch(createTodoListTC(title))
     }, [dispatch])
 
-    if (!isLoggedIn) {
-        return <Navigate to={'/login'}/>
-    }
+    if (!isLoggedIn) return <Navigate to={'login'}/>
 
     return <>
         <Grid container justifyContent={"center"} style={{padding: '15px'}}>
