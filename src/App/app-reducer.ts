@@ -4,20 +4,11 @@ import {setIsLoggedInAC} from "../Features/Login/auth-reducer";
 import {AxiosError} from "axios";
 import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
 
-export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
-export type SetStatusAT = ReturnType<typeof setAppStateAC>
-export type SetErrorAT = ReturnType<typeof setAppErrorAC>
-
-
-export type NullableType<T> = null | T
-
 const initialState = {
     status: 'idle' as RequestStatusType,
     error: null as NullableType<string>,
     isInitialized: false
 }
-
-type InitialStateType = typeof initialState
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -53,8 +44,12 @@ export const initializedAppTC = () => (dispatch: Dispatch<any>) => {
             handleServerNetworkError(dispatch, err.message)
         })
         .finally(() => dispatch(setAppInitializedAC(true)))
-
 }
 
 // Types
 type ActionsType = SetStatusAT | SetErrorAT | ReturnType<typeof setAppInitializedAC>
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+export type SetStatusAT = ReturnType<typeof setAppStateAC>
+export type SetErrorAT = ReturnType<typeof setAppErrorAC>
+export type NullableType<T> = null | T
+type InitialStateType = typeof initialState

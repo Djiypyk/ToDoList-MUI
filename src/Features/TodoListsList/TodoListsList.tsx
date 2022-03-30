@@ -17,10 +17,6 @@ import {AddItemForm} from "../../Components/AddItemForm/AddItemForm";
 import TodoList from "./TodoList/Todolist";
 import {Navigate} from "react-router-dom";
 
-type PropsType = {
-    demo?: boolean
-}
-
 export const TodoListsList: React.FC<PropsType> = ({demo = false}) => {
     //BLL:
     const todoLists = useSelector<AppRootStateType, Array<TodoListDomainType>>(state => state.todolists)
@@ -104,4 +100,8 @@ export const TodoListsList: React.FC<PropsType> = ({demo = false}) => {
             })}
         </Grid>
     </>
+}
+//Types
+type PropsType = {
+    demo?: boolean
 }

@@ -15,9 +15,7 @@ import {Navigate} from "react-router-dom";
 import {LoginParamsType} from "../../api/auth-api";
 
 export const Login = () => {
-
     const dispatch = useDispatch()
-
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
     const formik = useFormik({
@@ -97,9 +95,3 @@ export const Login = () => {
         </Grid>
     </Grid>
 }
-
-// type FormikErrorType = {
-//     email?: string
-//     password?: string
-//     rememberMe?: boolean
-// }

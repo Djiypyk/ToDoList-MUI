@@ -10,22 +10,6 @@ import {useDispatch} from "react-redux";
 import {EditableSpan} from "../../../Components/EditableSpan/EditableSpan";
 import {AddItemForm} from "../../../Components/AddItemForm/AddItemForm";
 
-type TodoListPropsType = {
-    title: string
-    todoListID: string
-    addTask: (title: string, todoListID: string) => void
-    tasks: Array<TaskType>
-    filter: FilterValuesType
-    removeTask: (id: string, todoListID: string) => void
-    changeTodoListFilter: (filter: FilterValuesType, todoListID: string) => void
-    changeTaskStatus: (id: string, status: TaskStatuses, todoListID: string) => void
-    removeTodoList: (todoListID: string) => void
-    changeTasksTitle: (taskID: string, title: string, todoListID: string) => void
-    changeTodoListTitle: (title: string, todoListID: string) => void
-    entityStatus: RequestStatusType
-    demo?: boolean
-}
-
 const TodoList = React.memo<TodoListPropsType>(({demo = false, ...props}) => {
     const dispatch = useDispatch()
 
@@ -121,3 +105,21 @@ const TodoList = React.memo<TodoListPropsType>(({demo = false, ...props}) => {
 })
 
 export default TodoList;
+
+//Types
+
+type TodoListPropsType = {
+    title: string
+    todoListID: string
+    addTask: (title: string, todoListID: string) => void
+    tasks: Array<TaskType>
+    filter: FilterValuesType
+    removeTask: (id: string, todoListID: string) => void
+    changeTodoListFilter: (filter: FilterValuesType, todoListID: string) => void
+    changeTaskStatus: (id: string, status: TaskStatuses, todoListID: string) => void
+    removeTodoList: (todoListID: string) => void
+    changeTasksTitle: (taskID: string, title: string, todoListID: string) => void
+    changeTodoListTitle: (title: string, todoListID: string) => void
+    entityStatus: RequestStatusType
+    demo?: boolean
+}
