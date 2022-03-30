@@ -12,12 +12,6 @@ import {Login} from "../Features/Login/Login";
 import {useDispatch, useSelector} from "react-redux";
 import {logOutTC} from '../Features/Login/auth-reducer';
 
-
-type PropsType = {
-    demo?: boolean
-}
-
-//C-R-U-D
 function AppWithRedux({demo = false}: PropsType) {
     const status = useAppSelector<RequestStatusType>((state) => state.app.status)
     const isInitialized = useAppSelector<boolean>((state) => state.app.isInitialized)
@@ -77,7 +71,8 @@ function AppWithRedux({demo = false}: PropsType) {
     )
 }
 
-
 export default AppWithRedux;
 
-
+type PropsType = {
+    demo?: boolean
+}

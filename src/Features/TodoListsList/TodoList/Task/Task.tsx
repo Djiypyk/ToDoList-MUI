@@ -4,14 +4,6 @@ import {EditableSpan} from "../../../../Components/EditableSpan/EditableSpan";
 import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 import {TaskStatuses, TaskType} from "../../../../api/todolists-api";
 
-export type TaskPropsType = {
-    todoListID: string
-    task: TaskType
-    removeTask: (id: string, todoListID: string) => void
-    changeTaskStatus: (id: string, status: TaskStatuses, todoListID: string) => void
-    changeTasksTitle: (taskID: string, title: string, todoListID: string) => void
-}
-
 export const Task = React.memo(({
                                     task,
                                     todoListID,
@@ -22,7 +14,7 @@ export const Task = React.memo(({
     const onRemoveTask = useCallback(() => removeTask(task.id, todoListID), [removeTask, task.id, todoListID])
 
     const changeStatus = useCallback((e: ChangeEvent<HTMLInputElement>) =>
-        changeTaskStatus(task.id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New, todoListID),
+            changeTaskStatus(task.id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New, todoListID),
         [task.id, todoListID, changeTaskStatus])
 
     const changeTaskTitle = useCallback((newTitle: string) => {
@@ -41,3 +33,12 @@ export const Task = React.memo(({
         </IconButton>
     </ListItem>
 })
+//Types
+export type TaskPropsType = {
+    todoListID: string
+    task: TaskType
+    removeTask: (id: string, todoListID: string) => void
+    changeTaskStatus: (id: string, status: TaskStatuses, todoListID: string) => void
+    changeTasksTitle: (taskID: string, title: string, todoListID: string) => void
+}
+

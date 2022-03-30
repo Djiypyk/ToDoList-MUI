@@ -13,7 +13,6 @@ import {AddItemForm} from "../../../Components/AddItemForm/AddItemForm";
 const TodoList = React.memo<TodoListPropsType>(({demo = false, ...props}) => {
     const dispatch = useDispatch()
 
-
     useEffect(() => {
         if (demo) {
             return
